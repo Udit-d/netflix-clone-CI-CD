@@ -9,17 +9,18 @@ from selenium.common.exceptions import NoSuchElementException
 import pytest
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service  # Import Service
-from webdriver_manager.chrome import ChromeDriverManager  # Import ChromeDriverManager
+from webdriver_manager.chrome import ChromeDriverManager  # Ensure this is installed
 
 @pytest.fixture(scope="session")
 def driver():
     chrome_options = Options()
     chrome_options.add_argument('--headless')  # Add this line for headless mode
     chrome_options.add_argument('--window-size=1920,1080')
+    # Specify executable_path using ChromeDriverManager
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     yield driver
     driver.quit()
-
+    
 def test_search_movie(driver):
     driver.get("http://13.233.145.49:3000")
     
