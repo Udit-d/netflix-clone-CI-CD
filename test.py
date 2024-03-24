@@ -8,10 +8,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 import pytest
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-
-# Import ChromeDriverManager from chromium instead of chrome
-from webdriver_manager.chrome import ChromeDriverManager
 
 @pytest.fixture(scope="session")
 def driver():
@@ -19,8 +15,12 @@ def driver():
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--window-size=1920,1080')
     
-    # Use ChromiumDriverManager instead of ChromeDriverManager
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager(chromium_type='chromium').install()), options=chrome_options)
+    # Specify the path to the Chromium WebDriver executable
+    chromium_driver_path = '/usr/bin/chromium-browser'  # Path to Chromium WebDriver
+    chrome_options.binary_location = '/usr/bin/chromium-browser'  # Path to Chromium browser
+    
+    # Initialize the WebDriver with the specified Chromium WebDriver executable
+    driver = webdriver.Chrome(executable_path=chromium_driver_path, options=chrome_options)
     
     yield driver
     driver.quit()
