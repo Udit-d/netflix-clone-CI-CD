@@ -15,15 +15,12 @@ def driver():
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--window-size=1920,1080')
     
-    # Specify the path to the Chromium WebDriver executable
-    chromium_driver_path = '/usr/bin/chromium-browser'  # Path to Chromium WebDriver
-    chrome_options.binary_location = '/usr/bin/chromium-browser'  # Path to Chromium browser
-    
-    # Initialize the WebDriver with the specified Chromium WebDriver executable
-    driver = webdriver.Chrome(executable_path=chromium_driver_path, options=chrome_options)
+    # Initialize the WebDriver without specifying the executable_path
+    driver = webdriver.Chrome(options=chrome_options)
     
     yield driver
     driver.quit()
+
     
 def test_search_movie(driver):
     driver.get("http://13.233.145.49:3000")
