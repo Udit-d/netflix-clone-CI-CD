@@ -8,16 +8,15 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 import pytest
 from selenium.webdriver.chrome.options import Options
-
-service = Service(executable_path=ChromeDriverManager().install())
+from selenium.webdriver.chrome.service import Service  # Import Service
+from webdriver_manager.chrome import ChromeDriverManager  # Import ChromeDriverManager
 
 @pytest.fixture(scope="session")
 def driver():
     chrome_options = Options()
     chrome_options.add_argument('--headless')  # Add this line for headless mode
     chrome_options.add_argument('--window-size=1920,1080')
-    # Do not specify executable_path for Chrome
-    driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     yield driver
     driver.quit()
 
