@@ -4,4 +4,4 @@ services:
   node-js:
    image: uditdevadiga/netflixclone:latest
    ports:
-     - "3000:3000"
+     - "1111:1111"
