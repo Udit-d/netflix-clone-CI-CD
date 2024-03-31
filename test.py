@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 import pytest
 from selenium.webdriver.chrome.options import Options
-
+#
 @pytest.fixture(scope="session")
 def driver():
     chrome_options = Options()
