@@ -23,7 +23,7 @@ def driver():
 
     
 def test_search_movie(driver):
-    driver.get("http://3.111.169.122:1111")
+    driver.get("http://13.200.45.156:1111")
     
     # Find the search input element and enter the movie name
     driver.maximize_window()
